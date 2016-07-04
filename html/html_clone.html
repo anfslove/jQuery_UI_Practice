@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CODE</title>
+	<link rel="stylesheet" href="../style/base.css">
+	<link rel="stylesheet" href="../js/jquery-ui-themes-1.11.2/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="../js/syntaxhighlighter_3.0.83/styles/shCoreDefault.css"/>
+	<link rel="stylesheet" href="../js/layout-master/source/stable/layout-default.css">
+	<script src="../js/jquery-1.11.2.min.js"></script>
+	<script src="../js/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+	<script src="../js/syntaxhighlighter_3.0.83/scripts/shBrushXml.js"></script>
+	<script src="../js/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
+	<script src="../js/layout-master/source/stable/jquery.layout.js"></script>
+</head>
+<body>
+	<div id="container">
+		<div class="ui-layout-north">
+			<strong><a href="../index.html">CODE INDEX</a></strong>
+		</div>
+		<div class="ui-layout-center">
+			<h5>HTML clone</h5>
+			<pre class="brush: html">
+				<script type="application/template" class="template">
+					<tr>
+						<td>
+							<input type='hidden' name='sidList' value='' />
+							<span></span>
+						</td>
+						<td><input type='text' class='text mail-list' name='mailList' /></td>
+						<td>&nbsp;</td>
+					</tr>
+				</script>
+				<script type="text/javascript">
+					var _newRowHtmlTemplate = $("script.template").clone().html();
+				</script>
+			</pre>
+		</div>
+	</div>
+
+	<script>
+		$(function() {
+			$("#menu").menu();
+			$("#container").layout({
+				west:{
+					size: 300
+				}
+			});
+			SyntaxHighlighter.all();
+		});
+	</script>
+</body>
+</html>

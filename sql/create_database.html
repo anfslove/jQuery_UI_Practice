@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CODE</title>
+	<link rel="stylesheet" href="../style/base.css">
+	<link rel="stylesheet" href="../js/jquery-ui-themes-1.11.2/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="../js/syntaxhighlighter_3.0.83/styles/shCoreDefault.css"/>
+	<link rel="stylesheet" href="../js/layout-master/source/stable/layout-default.css">
+	<script src="../js/jquery-1.11.2.min.js"></script>
+	<script src="../js/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+	<script src="../js/syntaxhighlighter_3.0.83/scripts/shBrushSql.js"></script>
+	<script src="../js/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
+	<script src="../js/layout-master/source/stable/jquery.layout.js"></script>
+</head>
+<body>
+	<div id="container">
+		<div class="ui-layout-north">
+			<strong><a href="../index.html">CODE INDEX</a></strong>
+		</div>
+		<div class="ui-layout-center">
+			<h5>Create database</h5>
+			<pre class="brush: sql">
+				-- Use our own SQL script to setup the database to get better control
+				USE master
+
+				-- Drop the database if it already exists to start on a clean slate
+				IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'DHL_OPS')
+				BEGIN
+				ALTER DATABASE [DHL_OPS]
+				SET OFFLINE
+				WITH ROLLBACK IMMEDIATE;
+
+				ALTER DATABASE [DHL_OPS]
+				SET ONLINE;
+
+				DROP DATABASE [DHL_OPS];
+				END
+
+				-- Create the database
+				GO
+				CREATE DATABASE DHL_OPS
+				ON 
+				( NAME = DHL_OPS_dat,
+				   FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\DHL_OPS.mdf',
+				   SIZE = 10MB,
+				   FILEGROWTH = 2MB )
+				LOG ON
+				( NAME = DHL_OPS_log,
+				   FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\DHL_OPS.ldf',
+				   SIZE = 5MB,
+				   MAXSIZE = 100MB,
+				   FILEGROWTH = 2MB )
+				COLLATE Chinese_PRC_CI_AS
+				GO
+			</pre>
+		</div>
+	</div>
+
+	<script>
+		$(function() {
+			$("#menu").menu();
+			$("#container").layout({
+				west:{
+					size: 300
+				}
+			});
+			SyntaxHighlighter.all();
+		});
+	</script>
+</body>
+</html>

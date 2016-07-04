@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CODE</title>
+	<link rel="stylesheet" href="../style/base.css">
+	<link rel="stylesheet" href="../js/jquery-ui-themes-1.11.2/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="../js/syntaxhighlighter_3.0.83/styles/shCoreDefault.css"/>
+	<link rel="stylesheet" href="../js/layout-master/source/stable/layout-default.css">
+	<script src="../js/jquery-1.11.2.min.js"></script>
+	<script src="../js/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
+	<script src="../js/layout-master/source/stable/jquery.layout.js"></script>
+</head>
+<body>
+	<div id="container">
+		<div class="ui-layout-north">
+			<strong><a href="../index.html">CODE INDEX</a></strong>
+		</div>
+		<div class="ui-layout-center">
+			<h5>Frameset Template</h5>
+			<textarea class="textarea-code">
+				<frameset border="0" framespacing="0" rows="60, *" frameborder="0">
+				    <frame name="header" src="header.cfm" frameborder="0" noresize scrolling="no">
+				    <frameset cols="170, *">
+				        <frame name="menu" src="menu.htm" frameborder="0" noresize>
+				        <frame name="main" src="main.htm" frameborder="0" noresize scrolling="yes">
+				    </frameset>
+				</frameset>
+				<noframes></noframes>
+			</textarea>
+		</div>
+	</div>
+
+	<script>
+		$(function() {
+			$("#menu").menu();
+			$("#container").layout({
+				west:{
+					size: 300
+				}
+			});
+			SyntaxHighlighter.all();
+		});
+	</script>
+</body>
+</html>

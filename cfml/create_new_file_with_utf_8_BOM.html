@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CODE</title>
+	<link rel="stylesheet" href="../style/base.css">
+	<link rel="stylesheet" href="../js/jquery-ui-themes-1.11.2/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="../js/syntaxhighlighter_3.0.83/styles/shCoreDefault.css"/>
+	<link rel="stylesheet" href="../js/layout-master/source/stable/layout-default.css">
+	<script src="../js/jquery-1.11.2.min.js"></script>
+	<script src="../js/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+	<script src="../js/syntaxhighlighter_3.0.83/scripts/shBrushColdFusion.js"></script>
+	<script src="../js/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
+	<script src="../js/layout-master/source/stable/jquery.layout.js"></script>
+</head>
+<body>
+	<div id="container">
+		<div class="ui-layout-north">
+			<strong><a href="../index.html">CODE INDEX</a></strong>
+		</div>
+		<div class="ui-layout-center">
+			<h5>Create new file with utf-8 with BOM</h5>
+			<pre class="brush: cf">
+				<!--- ToDo: how can generate the file with utf-8 with BOM? --->
+				<cffile
+					action="write"
+					file="#newHtmlFile#"
+					output="#newHtmlBody#"
+				/>
+				
+				<!---
+				*******************************************************************
+				** 	Using Java Instead of <cffile> to Write to Disk is much faster
+				**  http://www.burnette.us/blog/index.cfm/2006/1/30/Using-Java-Instead-of-cffile-to-Write-to-Disk
+				**  http://tech.badpen.com/index.cfm?mode=entry&entry=21
+				**  http://www.dgrigg.com/post.cfm/07/21/2006/CFFILE-vs-JavaIOBufferedWriter
+				*******************************************************************
+				--->
+				<cfscript>
+					reportFile = createobject("java", "java.io.File").init(newHtmlFile); 			 
+					rptStream = createobject("java", "java.io.FileOutputStream").init(reportFile);
+					// create the UTF-8 file writer and write the file contents  
+					rptWriter = createobject("java", "java.io.OutputStreamWriter");  
+					rptWriter.init(rptStream, "UTF-8");  
+
+					/* To add the BOM at the head of file.*/
+					rptStream.write(239);//0xEF
+					rptStream.write(187);//0xBB
+					rptStream.write(191);//0xBF
+					
+					rptWriter.write(newHtmlBody);
+					rptWriter.flush();   
+					rptWriter.close(); 
+					rptStream.close();
+				</cfscript>
+			</pre>
+		</div>
+	</div>
+
+	<script>
+		$(function() {
+			$("#menu").menu();
+			$("#container").layout({
+				west:{
+					size: 300
+				}
+			});
+			SyntaxHighlighter.all();
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Code</title>
+	<link rel="stylesheet" href="./style/base.css">
+	<link rel="stylesheet" href="./js/jquery-ui-themes-1.11.2/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="./js/layout-master/source/stable/layout-default.css">
+	<script src="./js/jquery-1.11.2.min.js"></script>
+	<script src="./js/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
+	<script type="text/javascript" src="./js/layout-master/source/stable/jquery.layout.js"></script>
+</head>
+<body>
+
+	<div id="container">
+		<div class="ui-layout-north">
+			<strong>CODE INDEX</strong>
+		</div>
+		<div class="menu ui-layout-west">
+			<ul id="menu">
+				<li>
+					HTML
+					<ul>
+						<li>
+							<a href="./html/html_clone.html">HTML CLONE</a>
+						</li>
+						<li>
+							<a href="./html/frameset_template.html">FRAMESET TEMPLATE</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					COLDFUSION
+					<ul>
+						<li>
+							<a href="./cfml/create_new_file_with_utf_8_BOM.html">CREATE NEW FILE</a>
+						</li>
+						<li>
+							<a href="./cfml/ternary_operator.html">TERNARY OPERATOR</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					SQL SERVER
+					<ul>
+						<li>
+							<a href="./sql/create_database.html">CREATE DATABASE</a>
+						</li>
+					</ul>
+				</li>
+				<li class="ui-state-disabled">
+					AMESVILLE
+				</li>
+			</ul>
+		</div>
+		<div class="ui-layout-center">
+			<h3>WELCOME</h3>
+			<h5>
+				Author:Pengcheng
+				<br>
+				2015-02-02
+			</h5>
+		</div>
+	</div>
+
+	<script>
+		$(function() {
+			$("#menu").menu();
+			$("#container").layout({
+				west:{
+					size: 300
+				}
+			});
+		});
+	</script>
+</body>
+</html>
